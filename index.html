@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Partnership Confluence Migration Tracker</title>
+<style>
+:root{--bg:#f4f6f8;--sf:#fff;--tx:#18222d;--mu:#667085;--bd:#d6dce4;--ac:#0e6b66;--ac2:#e1f1f0;--bad:#b42318;--badb:#fdeceb;--wn:#9a5b00;--wnb:#fff1d6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#12181e;--sf:#1a222b;--tx:#e6ebf0;--mu:#97a3b0;--bd:#2f3b47;--ac:#4cc2bb;--ac2:#173836;--bad:#ff8b7f;--badb:#3a1f1c;--wn:#f2b44d;--wnb:#3a2d12}}
+:root[data-theme=dark]{color-scheme:dark;--bg:#12181e;--sf:#1a222b;--tx:#e6ebf0;--mu:#97a3b0;--bd:#2f3b47;--ac:#4cc2bb;--ac2:#173836;--bad:#ff8b7f;--badb:#3a1f1c;--wn:#f2b44d;--wnb:#3a2d12}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:14px/1.45 "Segoe UI",system-ui,-apple-system,sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--sf)}
+header{padding:10px 16px 0;background:var(--sf);border-bottom:1px solid var(--bd);position:sticky;top:env(safe-area-inset-top,0px);z-index:5}
+h1{font-size:17px;margin:0 8px 0 0;display:inline}h2{font-size:15px;margin:18px 0 8px}h3{font-size:13px;margin:0 0 8px}
+nav{display:flex;gap:2px;overflow-x:auto;margin-top:6px}nav button{border:0;background:none;padding:8px 12px;border-bottom:2px solid transparent;color:var(--mu);cursor:pointer;white-space:nowrap;font:inherit}nav .on{color:var(--ac);border-color:var(--ac);font-weight:600}
+main{padding:14px 16px;max-width:1300px;margin:auto}
+button,input,select,textarea{font:inherit;color:inherit;background:var(--sf);border:1px solid var(--bd);border-radius:5px;padding:5px 8px;max-width:100%}
+button{cursor:pointer}button:hover{border-color:var(--ac)}button.pri{background:var(--ac);color:var(--sf);border-color:var(--ac);font-weight:600}button.dn{color:var(--bad);border-color:var(--bad)}
+:focus-visible{outline:2px solid var(--ac);outline-offset:1px}
+input[type=checkbox]{width:auto;accent-color:var(--ac)}textarea{width:100%}label{display:flex;flex-direction:column;gap:2px;font-size:12px;color:var(--mu)}label.ck{flex-direction:row;align-items:center;gap:6px;font-size:13px;color:var(--tx)}
+.bar{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-bottom:10px}.bar>#q{flex:1 1 220px}.sp{flex:1}.bk{background:var(--ac2);padding:6px 8px;border-radius:6px}.cf label{flex:1 1 180px}
+.tw{overflow-x:auto;background:var(--sf);border:1px solid var(--bd);border-radius:6px}table{border-collapse:collapse;width:100%;min-width:860px}th,td{padding:5px 8px;border-bottom:1px solid var(--bd);text-align:left;vertical-align:top}th{font-size:12px;color:var(--mu);background:var(--bg)}th a{color:inherit;text-decoration:none}td input,td select,td textarea{width:100%;min-width:90px;padding:3px 5px}
+tr.od td:first-child{box-shadow:inset 3px 0 var(--bad)}tr.od{background:var(--badb)}a{color:var(--ac)}
+.tag{font-size:11px;padding:1px 6px;border-radius:9px;margin-left:4px;background:var(--wnb);color:var(--wn)}.tag.bad{background:var(--bad);color:var(--sf)}
+.mu{color:var(--mu);font-size:12px}.empty{padding:28px;text-align:center;color:var(--mu)}
+.ms{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin-bottom:10px}.m{background:var(--sf);border:1px solid var(--bd);border-radius:6px;padding:10px;font-size:12px;color:var(--mu)}.m b{display:block;font-size:26px;color:var(--tx);line-height:1.1}.m.bad b{color:var(--bad)}
+.g{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:10px}.card{background:var(--sf);border:1px solid var(--bd);border-radius:6px;padding:12px}
+.br,.pg{display:grid;grid-template-columns:110px 1fr 34px;gap:8px;align-items:center;font-size:12px;margin:3px 0}.br i,.pg i{height:8px;background:var(--bg);border-radius:4px;position:relative}.br i::after,.pg i::after{content:"";position:absolute;inset:0 auto 0 0;width:var(--w);background:var(--ac);border-radius:4px}.br b,.pg b{text-align:right}
+.li{display:flex;justify-content:space-between;gap:8px;padding:3px 0;border-bottom:1px solid var(--bd)}.li a{overflow:hidden;text-overflow:ellipsis}
+dialog{background:var(--sf);color:var(--tx);border:1px solid var(--bd);border-radius:8px;width:min(760px,96vw);max-height:92vh;padding:16px}dialog::backdrop{background:#0008}
+.fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;margin-bottom:10px}fieldset{border:1px solid var(--bd);border-radius:6px;margin:0 0 10px;display:flex;flex-wrap:wrap;gap:4px 16px}legend{font-size:12px;color:var(--mu)}
+#askm{margin-top:0}#ask menu,#out menu{display:flex;flex-direction:row-reverse;gap:6px;padding:0;justify-content:flex-start}#out textarea{height:50vh;font:12px monospace}
+code{display:block;background:var(--bg);padding:6px 8px;border-radius:4px;word-break:break-all;font-size:12px}#toast{position:fixed;left:50%;bottom:calc(16px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--tx);color:var(--bg);padding:7px 14px;border-radius:6px;opacity:0;pointer-events:none;transition:opacity .2s;z-index:50}#toast.on{opacity:1}
+hr{border:0;border-top:1px solid var(--bd);margin:10px 0}ol{margin:0;padding-left:18px}li{margin:3px 0}
+</style></head><body>
+<header><h1>Partnership Confluence Migration Tracker</h1><span class="mu">DW to Astro. Data stays in this browser.</span><nav id="tabs"></nav></header>
+<main id="main"></main>
+<dialog id="dlg"><form id="fm" onsubmit="sv();return false"></form></dialog>
+<dialog id="ask"><form method="dialog"><p id="askm"></p><input id="aski" hidden style="width:100%"><menu><button value="ok" class="pri">OK</button><button value="cancel">Cancel</button></menu></form></dialog>
+<dialog id="out"><h3 id="outt"></h3><textarea id="outx" readonly></textarea><menu><button data-a="outx">Close</button><button data-a="outdl">Download</button><button data-a="outcp" class="pri">Copy</button></menu></dialog>
+<div id="toast" role="status"></div>
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const E=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const ST=["Not started","Started","In progress","Review","Done","Cancelled","On hold"],PR=["P0","P1","P2"],AC=["Update","Rewrite","Merge","Archive","Create new","No change"],AR=["Partner registration","IB lifecycle","Backend/integration","Support/escalation","Navigation/hub","Other"],IM=["DW reference","IB onboarding removed","Backend change","Link/navigation","Screenshot","Other"],MS=["Not started","In progress","Done"];
+const F=["id","pageTitle","confluenceUrl","processArea","pageOwner","priority","pageAction","status","migrationImpact","dueDate","lastReviewedDate","notes","createdAt","updatedAt"];
+const td=(n=0)=>{const d=new Date();d.setDate(d.getDate()+n);return new Date(d-d.getTimezoneOffset()*6e4).toISOString().slice(0,10)};
+const uid=()=>Math.random().toString(36).slice(2,9);
+const mk=o=>({id:uid(),pageTitle:"",confluenceUrl:"",processArea:"Other",pageOwner:"",priority:"P2",pageAction:"Update",status:"Not started",migrationImpact:[],dueDate:"",lastReviewedDate:"",notes:"",createdAt:td(),updatedAt:td(),...o});
+function seed(){const U=n=>"https://example.atlassian.net/wiki/spaces/PART/pages/"+n;
+return{pages:[
+mk({id:"p1",pageTitle:"Partner Registration: End-to-End Process",confluenceUrl:U(100001),processArea:"Partner registration",pageOwner:"A. Rahman",priority:"P0",status:"Drafting",migrationImpact:["DW reference","Backend change"],dueDate:td(3)}),
+mk({id:"p2",pageTitle:"IB Onboarding Guide",confluenceUrl:U(100002),processArea:"IB lifecycle",pageOwner:"M. Chen",priority:"P0",pageAction:"Archive",status:"SME review",migrationImpact:["IB onboarding removed","DW reference"],dueDate:td(-2),notes:"Replacement: Partner Registration page."}),
+mk({id:"p3",pageTitle:"IB Lifecycle: Tier Changes and Offboarding",confluenceUrl:U(100003),processArea:"IB lifecycle",pageOwner:"M. Chen",priority:"P1",pageAction:"Rewrite",migrationImpact:["IB onboarding removed"],dueDate:td(10)}),
+mk({id:"p4",pageTitle:"Astro Partner Record Sync: Integration Overview",confluenceUrl:U(100004),processArea:"Backend/integration",pageOwner:"J. Lim",priority:"P0",pageAction:"Create new",status:"Drafting",migrationImpact:["Backend change","Screenshot"],dueDate:td(5)}),
+mk({id:"p5",pageTitle:"DW Commission Export Runbook",confluenceUrl:U(100005),processArea:"Backend/integration",pageOwner:"J. Lim",priority:"P1",pageAction:"Archive",status:"Archived",migrationImpact:["DW reference"],lastReviewedDate:td(-6)}),
+mk({id:"p6",pageTitle:"Partnerships Hub",confluenceUrl:U(100006),processArea:"Navigation/hub",pageOwner:"A. Rahman",priority:"P1",status:"Published",migrationImpact:["Link/navigation"],lastReviewedDate:td(-3)}),
+mk({id:"p7",pageTitle:"Partner Escalation Contacts",confluenceUrl:U(100007),processArea:"Support/escalation",pageOwner:"R. Gomez",migrationImpact:["DW reference"],dueDate:td(21)}),
+mk({id:"p8",pageTitle:"Partner FAQ",confluenceUrl:U(100008),processArea:"Support/escalation",pageOwner:"R. Gomez",pageAction:"Merge",status:"Inventory",migrationImpact:["DW reference","Screenshot"],dueDate:td(-5)}),
+mk({id:"p9",pageTitle:"Partner Offboarding Checklist",confluenceUrl:U(100009),pageOwner:"R. Gomez",pageAction:"No change",status:"No change"})],
+map:[{id:uid(),old:"Register partner in DW (manual form)",neu:"Create partner record in Astro via intake form",pages:["p1"],owner:"A. Rahman",status:"In progress",notes:""},
+{id:uid(),old:"IB onboarding in DW",neu:"Retired. IB onboarding is no longer performed.",pages:["p2","p3"],owner:"M. Chen",status:"In progress",notes:"Archive banner needed"},
+{id:uid(),old:"Nightly DW commission export to Finance",neu:"Astro to Finance integration sync",pages:["p4","p5"],owner:"J. Lim",status:"Not started",notes:""},
+{id:uid(),old:"DW escalation queue",neu:"Astro case routing",pages:["p7","p8"],owner:"R. Gomez",status:"Done",notes:""}]};}
+let S;try{S=JSON.parse(localStorage.getItem("pcmt1"))}catch(e){}
+if(!S||!Array.isArray(S.pages))S=seed();
+const SM={Inventory:"Started",Drafting:"In progress","SME review":"Review",Published:"Done",Archived:"Done","No change":"Cancelled"};
+S.pages=S.pages.map(p=>{const o=mk({});F.forEach(k=>{if(p[k]!==undefined)o[k]=p[k]});o.status=SM[o.status]||(ST.includes(o.status)?o.status:"Not started");return o});
+S.map=(S.map||[]).map(r=>({...r,pages:Array.isArray(r.pages)?r.pages:String(r.pages||"").split(/[;,]/).map(t=>(S.pages.find(p=>p.pageTitle==t.trim())||{}).id).filter(Boolean)}));
+const save=()=>{try{localStorage.setItem("pcmt1",JSON.stringify(S))}catch(e){toast("Browser storage unavailable")}};
+let tab="Dashboard",fl={q:""},sort=["dueDate",1],sel=new Set(),cur=null,xo={},openMap=new Set();
+const TABS=["Dashboard","Pages","Process Mapping"];
+const done=p=>["Done","Cancelled"].includes(p.status),over=p=>p.dueDate&&p.dueDate<td()&&!done(p),refs=p=>p.migrationImpact.some(i=>i=="DW reference"||i=="IB onboarding removed");
+const opt=(a,v,all)=>(all?`<option value="">${all}</option>`:"")+a.map(x=>`<option${x==v?" selected":""}>${E(x)}</option>`).join("");
+const gp=id=>S.pages.find(p=>p.id==id);
+function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove("on"),2200)}
+function ask(msg,inp){return new Promise(r=>{const d=$("#ask"),i=$("#aski");$("#askm").textContent=msg;i.hidden=!inp;i.value="";d.returnValue="";d.showModal();if(inp)i.focus();d.onclose=()=>r(d.returnValue=="ok"?(inp?i.value.trim()||null:true):(inp?null:false))})}
+async function cp(t){try{await navigator.clipboard.writeText(t)}catch(e){const a=document.createElement("textarea");a.value=t;document.body.appendChild(a);a.select();document.execCommand("copy");a.remove()}toast("Copied")}
+function xp(name,text,type){xo={name,text,type};$("#outt").textContent=name;$("#outx").value=text;$("#out").showModal()}
+const csv=rows=>"\ufeff"+rows.map(r=>r.map(c=>{c=String(c??"");return /[",\n\r]/.test(c)?'"'+c.replace(/"/g,'""')+'"':c}).join(",")).join("\n");
+function render(){$("#tabs").innerHTML=TABS.map(t=>`<button data-a="tab" data-t="${t}" class="${t==tab?"on":""}">${t}</button>`).join("");$("#main").innerHTML={Dashboard:dash,Pages:pagesV,"Process Mapping":mapV}[tab]();if(tab=="Pages")drawTbl()}
+/* Dashboard */
+const bars=(t,a,get)=>{const n=a.map(v=>get(v)),m=Math.max(1,...n);return `<div class="card"><h3>${t}</h3>${a.map((v,i)=>`<div class="br"><span>${v}</span><i style="--w:${n[i]/m*100}%"></i><b>${n[i]}</b></div>`).join("")}</div>`};
+const li=(a,b)=>`<div class="li">${a}<span class="mu">${b}</span></div>`;
+const lst=(t,a,fn)=>`<div class="card"><h3>${t} <span class="mu">(${a.length})</span></h3>${a.length?a.slice(0,12).map(fn).join(""):'<p class="mu">Nothing here.</p>'}</div>`;
+const pl=p=>li(`<a href="#" data-a="open" data-id="${p.id}">${E(p.pageTitle)}</a>`,`${p.priority} ${E(p.pageOwner||"unassigned")} ${p.dueDate}`);
+const un=r=>r.pages.map(gp).filter(p=>p&&!done(p));
+const ml=r=>li(`${E(r.old)} → ${E(r.neu)}`,`${E(r.owner||"unassigned")} ${r.status} ${un(r).length}/${r.pages.length} pages open`);
+function dash(){const P=S.pages,M=S.map,n=P.length;if(!n&&!M.length)return '<p class="empty">Nothing tracked yet. Add pages on the Pages tab and process changes on Process Mapping.</p>';
+const pc=(x,t)=>t?Math.round(x/t*100):0,T=td(),od=P.filter(over),soon=P.filter(p=>p.dueDate>=T&&p.dueDate<=td(7)&&!done(p)),rf=P.filter(p=>refs(p)&&!done(p)),rev=P.filter(p=>p.status=="Review"),blk=P.filter(p=>p.priority!="P2"&&over(p)),rv=P.filter(p=>p.lastReviewedDate).length;
+const om=M.filter(r=>r.status!="Done"),wait=P.filter(p=>!done(p)&&om.some(r=>r.pages.includes(p.id))),mism=M.filter(r=>r.status=="Done"&&un(r).length),md=M.filter(r=>r.status=="Done").length;
+const m=(l,v,c)=>`<div class="m ${c||""}"><b>${v}</b>${l}</div>`,pg=(l,v)=>`<div class="pg"><span>${l}</span><i style="--w:${v}%"></i><b>${v}%</b></div>`;
+return `<div class="ms">${m("Total pages",n)}${m("Overdue",od.length,od.length?"bad":"")}${m("Due in 7 days",soon.length)}${m("DW/IB references remaining",rf.length,rf.length?"bad":"")}${m("In review",rev.length)}${m("Process changes done",md+"/"+M.length)}${m("Pages waiting on open process changes",wait.length,wait.length?"bad":"")}</div>
+<div class="g"><div class="card"><h3>Progress</h3>${pg("Done",pc(P.filter(p=>p.status=="Done").length,n))}${pg("Reviewed",pc(rv,n))}${pg("DW/IB left",pc(rf.length,n))}${pg("Process done",pc(md,M.length))}</div>${bars("Pages by status",ST,v=>P.filter(p=>p.status==v).length)}${bars("By priority",PR,v=>P.filter(p=>p.priority==v).length)}${bars("By action",AC,v=>P.filter(p=>p.pageAction==v).length)}${bars("Process changes by status",MS,v=>M.filter(r=>r.status==v).length)}</div>
+<h2>Process mapping tracker</h2><div class="g">${lst("Open process changes",om,ml)}${lst("Pages waiting on open process changes",wait,pl)}${lst("Marked Done, but linked pages unfinished",mism,ml)}</div>
+<h2>This week’s stand-up view</h2><div class="g">${lst("P0/P1 overdue",blk,pl)}${lst("Awaiting review",rev,pl)}${lst("Overdue",od,pl)}${lst("Due in the next 7 days",soon,pl)}${lst("Still flagged DW / IB onboarding removed",rf,pl)}</div>`}
+/* Pages */
+function pagesV(){const pp=S.pages,u=k=>[...new Set(pp.map(p=>p[k]).filter(Boolean))].sort(),s=(k,a,l)=>`<select data-fl="${k}" aria-label="${l}">${opt(a,fl[k],l)}</select>`;
+return `<div class="bar"><input type="text" id="q" data-fl="q" placeholder="Search pages  ( / )" value="${E(fl.q)}">${s("status",ST,"Status")}${s("priority",PR,"Priority")}${s("pageAction",AC,"Action")}${s("processArea",AR,"Process area")}${s("pageOwner",u("pageOwner"),"Owner")}${s("imp",IM,"Impact")}<label class="ck"><input type="checkbox" data-fl="od" ${fl.od?"checked":""}> Overdue only</label><label class="ck"><input type="checkbox" data-fl="rf" ${fl.rf?"checked":""}> Has DW/IB refs</label><button data-a="clr">Clear</button><span class="sp"></span><button data-a="new" class="pri">+ Add page ( n )</button><button data-a="expf">Export CSV</button></div><div id="bulk"></div><div class="tw" id="tbl"></div><datalist id="ppl">${u("pageOwner").map(x=>`<option>${E(x)}</option>`).join("")}</datalist>`}
+function flt(){const f=fl,q=(f.q||"").toLowerCase(),r=S.pages.filter(p=>(!q||[p.pageTitle,p.confluenceUrl,p.notes].join(" ").toLowerCase().includes(q))&&["status","priority","pageAction","processArea","pageOwner"].every(k=>!f[k]||p[k]==f[k])&&(!f.imp||p.migrationImpact.includes(f.imp))&&(!f.od||over(p))&&(!f.rf||refs(p)));const[k,d]=sort;return r.sort((a,b)=>(String(a[k]||"~")>String(b[k]||"~")?1:-1)*d)}
+const row=p=>{const d=`data-id="${p.id}"`,s=(k,a)=>`<td><select ${d} data-f="${k}">${opt(a,p[k])}</select></td>`;return `<tr class="${over(p)?"od":""}"><td><input type="checkbox" data-s="${p.id}" ${sel.has(p.id)?"checked":""} aria-label="Select page"></td><td><a href="#" data-a="open" data-id="${p.id}">${E(p.pageTitle)}</a>${over(p)?'<b class="tag bad">Overdue</b>':""}${refs(p)&&!done(p)?'<b class="tag">DW/IB</b>':""}${openMap.has(p.id)&&!done(p)?'<b class="tag">Open process change</b>':""}<div class="mu">${E(p.processArea)} / ${E(p.pageAction)}</div></td><td><input ${d} data-f="pageOwner" list="ppl" value="${E(p.pageOwner)}"></td>${s("priority",PR)}${s("status",ST)}<td><input type="date" ${d} data-f="dueDate" value="${p.dueDate}"></td></tr>`};
+function drawTbl(){openMap=new Set(S.map.filter(r=>r.status!="Done").flatMap(r=>r.pages));const r=flt(),h=[["Page","pageTitle"],["Owner","pageOwner"],["Priority","priority"],["Status","status"],["Due","dueDate"]],all=r.length&&r.every(p=>sel.has(p.id));
+$("#tbl").innerHTML=!S.pages.length?'<p class="empty">No pages yet. Click “Add page”.</p>':!r.length?'<p class="empty">No pages match these filters. Try “Clear”.</p>':`<table><thead><tr><th><input type="checkbox" data-a="all" ${all?"checked":""} aria-label="Select all shown"></th>${h.map(([l,k])=>`<th><a href="#" data-a="sort" data-k="${k}">${l}${sort[0]==k?(sort[1]>0?" ▲":" ▼"):""}</a></th>`).join("")}</tr></thead><tbody>${r.map(row).join("")}</tbody></table><p class="mu" style="padding:0 8px">${r.length} of ${S.pages.length} pages. Red edge = overdue.</p>`;
+const n=sel.size;$("#bulk").innerHTML=n?`<div class="bar bk"><b>${n} selected</b><select data-b="status">${opt(ST,"","Set status")}</select><select data-b="priority">${opt(PR,"","Set priority")}</select><button data-a="bo">Assign owner</button><button data-a="br">Mark reviewed</button><button data-a="ba" class="dn">Archive selected</button><button data-a="bx">Clear selection</button></div>`:""}
+const each=fn=>{S.pages.filter(p=>sel.has(p.id)).forEach(p=>{fn(p);p.updatedAt=td()});save();drawTbl()};
+function openP(id){cur=id?gp(id):mk({});const p=cur,i=(k,l,t="text")=>`<label>${l}<input name="${k}" type="${t}" value="${E(p[k])}"></label>`,s=(k,l,a)=>`<label>${l}<select name="${k}">${opt(a,p[k])}</select></label>`;
+$("#fm").innerHTML=`<h2 style="margin-top:0">${id?"Edit page":"New page"}</h2><div class="fg">${i("pageTitle","Page title *")}${i("confluenceUrl","Confluence URL")}${s("processArea","Process area",AR)}${i("pageOwner","Owner")}${s("priority","Priority",PR)}${s("pageAction","Page action",AC)}${s("status","Status",ST)}${i("dueDate","Due date","date")}${i("lastReviewedDate","Last reviewed","date")}</div><fieldset><legend>Migration impact</legend>${IM.map(x=>`<label class="ck"><input type="checkbox" name="imp" value="${x}" ${p.migrationImpact.includes(x)?"checked":""}> ${x}</label>`).join("")}</fieldset><label>Notes<textarea name="notes" rows="3">${E(p.notes)}</textarea></label><div class="bar" style="margin-top:10px"><button class="pri">Save</button><button type="button" data-a="dclose">Cancel</button><span class="sp"></span>${id?'<button type="button" class="dn" data-a="ddel">Delete page</button>':""}</div>`;$("#dlg").showModal();$("[name=pageTitle]",$("#fm")).focus()}
+function rd(){const o={};$$("[name]",$("#fm")).forEach(e=>{if(e.type!="checkbox")o[e.name]=e.value.trim()});o.migrationImpact=$$("[name=imp]:checked",$("#fm")).map(e=>e.value);return o}
+const nu=u=>u.trim().toLowerCase().replace(/\/+$/,"");
+async function sv(){const o=rd();if(!o.pageTitle)return toast("Page title is required");
+if(o.confluenceUrl){try{if(!/^https?:$/.test(new URL(o.confluenceUrl).protocol))throw 0}catch(e){return toast("Enter a valid http(s) URL")}
+const d=S.pages.find(p=>p.id!=cur.id&&p.confluenceUrl&&nu(p.confluenceUrl)==nu(o.confluenceUrl));if(d&&!await ask(`Duplicate URL: “${d.pageTitle}” already uses it. Save anyway?`))return}
+Object.assign(cur,o,{updatedAt:td()});if(!S.pages.includes(cur))S.pages.push(cur);save();$("#dlg").close();render();toast("Saved")}
+/* Process mapping */
+function mapV(){const ta=(r,k)=>`<td><textarea rows="2" data-m="${r.id}" data-k="${k}">${E(r[k])}</textarea></td>`;
+return `<div class="bar"><button data-a="mnew" class="pri">+ Add row</button><button data-a="mexp">Export CSV</button><span class="mu">Tick the pages each change affects. The Dashboard tracks them.</span></div><div class="tw"><table><thead><tr><th>Old DW task/process</th><th>New Astro process</th><th>Affected pages</th><th>Owner</th><th>Status</th><th>Notes</th><th></th></tr></thead><tbody>${S.map.map(r=>`<tr>${ta(r,"old")}${ta(r,"neu")}<td><details><summary>${r.pages.length} page(s)</summary>${S.pages.map(p=>`<label class="ck"><input type="checkbox" data-mp="${r.id}" value="${p.id}" ${r.pages.includes(p.id)?"checked":""}> ${E(p.pageTitle)}</label>`).join("")||'<span class="mu">Add pages first</span>'}</details></td>${ta(r,"owner")}<td><select data-m="${r.id}" data-k="status">${opt(MS,r.status)}</select></td>${ta(r,"notes")}<td><button data-a="mdel" data-id="${r.id}">Delete</button></td></tr>`).join("")}</tbody></table>${S.map.length?"":'<p class="empty">No rows yet. Add one for each DW task and its Astro replacement.</p>'}</div>`}
+const A={
+tab:e=>{tab=e.dataset.t;render()},open:e=>openP(e.dataset.id),new:()=>openP(),
+sort:e=>{const k=e.dataset.k;sort=[k,sort[0]==k?-sort[1]:1];drawTbl()},clr:()=>{fl={q:""};render()},
+all:e=>{flt().forEach(p=>e.checked?sel.add(p.id):sel.delete(p.id));drawTbl()},
+bo:async()=>{const v=await ask("Owner for "+sel.size+" selected pages:",1);if(v)each(p=>p.pageOwner=v)},
+br:()=>each(p=>p.lastReviewedDate=td()),
+ba:async()=>{if(await ask(`Archive ${sel.size} pages? Status becomes Done and action Archive. Nothing is deleted.`))each(p=>{p.status="Done";p.pageAction="Archive"})},
+bx:()=>{sel.clear();drawTbl()},
+expf:()=>xp("pages.csv",csv([F,...flt().map(p=>F.map(k=>Array.isArray(p[k])?p[k].join(";"):p[k]))]),"text/csv"),
+dclose:()=>$("#dlg").close(),
+ddel:async()=>{if(await ask("Delete this page permanently? It will also be unlinked from process mapping rows.")){S.pages=S.pages.filter(p=>p!=cur);S.map.forEach(r=>r.pages=r.pages.filter(x=>x!=cur.id));sel.delete(cur.id);save();$("#dlg").close();render()}},
+mnew:()=>{S.map.push({id:uid(),old:"",neu:"",pages:[],owner:"",status:"Not started",notes:""});save();render()},
+mdel:async e=>{if(await ask("Delete this mapping row?")){S.map=S.map.filter(r=>r.id!=e.dataset.id);save();render()}},
+mexp:()=>xp("process-mapping.csv",csv([["Old DW task/process","New Astro process","Affected pages","Owner","Status","Notes"],...S.map.map(r=>[r.old,r.neu,r.pages.map(id=>(gp(id)||{}).pageTitle).filter(Boolean).join("; "),r.owner,r.status,r.notes])]),"text/csv"),
+outcp:()=>cp(xo.text),outx:()=>$("#out").close(),
+outdl:()=>{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([xo.text],{type:xo.type}));a.download=xo.name;a.click();toast("If nothing downloaded, use Copy")}};
+document.addEventListener("click",e=>{const el=e.target.closest("[data-a]");if(!el||!A[el.dataset.a])return;if(el.tagName=="A")e.preventDefault();A[el.dataset.a](el,e)});
+document.addEventListener("input",e=>{const t=e.target;if(t.dataset.fl){fl[t.dataset.fl]=t.type=="checkbox"?t.checked:t.value;drawTbl()}});
+document.addEventListener("change",e=>{const t=e.target;
+if(t.dataset.f){const p=gp(t.dataset.id);p[t.dataset.f]=t.value;p.updatedAt=td();save();if(t.dataset.f=="status"||t.dataset.f=="dueDate")drawTbl()}
+else if(t.dataset.s){t.checked?sel.add(t.dataset.s):sel.delete(t.dataset.s);drawTbl()}
+else if(t.dataset.b){if(t.value)each(p=>p[t.dataset.b]=t.value)}
+else if(t.dataset.mp){const r=S.map.find(x=>x.id==t.dataset.mp);r.pages=t.checked?[...r.pages,t.value]:r.pages.filter(x=>x!=t.value);save();t.closest("details").querySelector("summary").textContent=r.pages.length+" page(s)"}
+else if(t.dataset.m){S.map.find(x=>x.id==t.dataset.m)[t.dataset.k]=t.value;save()}});
+document.addEventListener("keydown",e=>{if(e.target.closest("input,textarea,select")||document.querySelector("dialog[open]")||e.metaKey||e.ctrlKey)return;if(e.key=="/"&&tab=="Pages"){e.preventDefault();$("#q").focus()}if(e.key=="n"){e.preventDefault();tab="Pages";render();openP()}});
+render();
+</script></body></html>
